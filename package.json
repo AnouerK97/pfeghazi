@@ -1,0 +1,39 @@
+{
+  "name": "analytics-hr",
+  "description": "HR Analytics KPMG",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ghzi Gaied"
+  },
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "clean": "rm -rf .nuxt dist node_modules package-lock.json yarn.lock && yarn",
+    "format:prettier": "prettier --write ."
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "0.8.5",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "@types/chart.js": "^2.9.38",
+    "@types/node": "^20.7.0",
+    "@types/prettier": "^3.0.0",
+    "nuxt": "^3.7.4",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "tailwind-scrollbar": "^3.0.5"
+  },
+  "dependencies": {
+    "@morev/vue-transitions": "^2.3.6",
+    "@nuxt/ui": "^2.8.1",
+    "@vueuse/nuxt": "^10.4.1",
+    "chart.js": "^4.4.0",
+    "nuxt-headlessui": "^1.1.4",
+    "nuxt-icon": "^0.5.0",
+    "vue": "^3.3.4",
+    "vue-chartjs": "^5.2.0",
+    "vue-router": "4"
+  }
+}
