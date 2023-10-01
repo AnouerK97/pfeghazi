@@ -12,10 +12,8 @@ export default defineNuxtConfig({
   headlessui: { prefix: "H" },
   app: {
     head: {
-      title: "KPMG",
+      title: "HR Analytics - KPMG",
       link: [
-        // Favicon
-        { rel: "icon", type: "image/x-icon", href: "/icon.svg" },
         //Inter font
         { rel: "stylesheet", href: "https://rsms.me/inter/inter.css" },
         { rel: "preconnect", href: "https://rsms.me/" },
@@ -24,8 +22,8 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/proxy/**': {
-        proxy: { to: "http://127.0.0.1:5000/api/**", },
-    }
-  }
+    "/proxy/**": {
+      proxy: { to: "http://127.0.0.1:5000/api/**" },
+    },
+  },
 });

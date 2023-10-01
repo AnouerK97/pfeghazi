@@ -6,7 +6,11 @@
         to="/"
         class="inline-flex items-center gap-4 p-3 px-4 text-left text-[15px]"
       >
-        <Icon v-if="l.icon" :name="l.icon" class="h-5 w-5 text-muted-foreground" />
+        <Icon
+          v-if="l.icon"
+          :name="l.icon"
+          class="h-5 w-5 text-muted-foreground"
+        />
         <p class="truncate">
           {{ l.title }}
         </p>
@@ -17,7 +21,11 @@
           class="inline-flex items-center justify-between p-3 px-4 text-left text-[15px]"
         >
           <div class="flex items-center gap-4">
-            <Icon v-if="l.icon" :name="l.icon" class="h-5 w-5 text-muted-foreground" />
+            <Icon
+              v-if="l.icon"
+              :name="l.icon"
+              class="h-5 w-5 text-muted-foreground"
+            />
             <p class="truncate">
               {{ l.title }}
             </p>
@@ -33,7 +41,10 @@
         <TransitionExpand>
           <HDisclosurePanel class="mx-6 flex flex-col border-l px-3">
             <template v-for="(i, j) in l.items" :key="j">
-              <NuxtLink class="rounded-md px-3 py-1.5 text-sm hover:bg-muted" :to=i.url>
+              <NuxtLink
+                class="rounded-md px-3 py-1.5 text-sm hover:bg-muted"
+                :to="i.url"
+              >
                 {{ i.title }}
               </NuxtLink>
             </template>
@@ -45,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps<{
-    links?: any[];
-  }>();
+const props = defineProps<{
+  links?: any[];
+}>();
 </script>
