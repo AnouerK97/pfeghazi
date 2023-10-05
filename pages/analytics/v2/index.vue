@@ -83,43 +83,43 @@
     </section>
 
     <section class="mb-5 grid gap-5 md:grid-cols-3">
-      <Charts-DoughnutChart
-        :data="BusinessTravelStats"
+      <Charts-LineChart
+        :data="EnvironmentSatisfaction"
         v-if="renderComponent"
-        name="Business Travel Distribuation"
+        name="Env Satisfaction Distribution"
       />
-      <Charts-DoughnutChart
-        :data="DepartmentStats"
+      <Charts-LineChart
+        :data="JobInvolvement"
         v-if="renderComponent"
-        name="Department Distribuation"
+        name="Job Involvement Distribution"
       />
-      <Charts-DoughnutChart
-        :data="JobRoleStats"
+      <Charts-LineChart
+        :data="JobSatisfaction"
         v-if="renderComponent"
-        name="Job Roled Stats Distribuation"
+        name="Job Satisfaction Distribution"
       />
     </section>
     <section class="mb-5 grid gap-5 md:grid-cols-3">
       <Charts-DoughnutChart
-        :data="TotalWorkingYearsStats"
+        :data="PerformanceRating"
         v-if="renderComponent"
-        name="Total Working Years Distribuation"
+        name="Performance Rating Distribution"
       />
       <Charts-DoughnutChart
-        :data="TrainingTimesLastYearStats"
+        :data="RelationshipSatisfaction"
         v-if="renderComponent"
-        name="Training Times Last Year Distribuation"
+        name="Relationship Distribution"
       />
       <Charts-DoughnutChart
-        :data="YearsAtCompanyStats"
+        :data="WorkLifeBalance"
         v-if="renderComponent"
-        name="Years At Company Distribuation"
+        name="WorkLife Balance Distribution"
       />
     </section>
     <Charts-LineChart
-      :data="YearsInCurrentRoleStats"
+      :data="YearsSinceLastPromotion"
       v-if="renderComponent"
-      name="Years In Current Role Distribuation"
+      name="Years Since Last Promotion Distribution"
     />
   </div>
 </template>
@@ -129,44 +129,48 @@ const attrition = ref("");
 const department = ref("");
 const jobRole = ref("");
 
-const { data: BusinessTravelStats } = await useFetch(
-  "/proxy/stats/v1/BusinessTravel/3",
+const { data: EnvironmentSatisfaction } = await useFetch(
+  "/proxy/stats/v2/EnvironmentSatisfaction/4",
   {
     method: "get",
   },
 );
 
-const { data: DepartmentStats } = await useFetch(
-  "/proxy/stats/v1/Department/13",
+const { data: JobInvolvement } = await useFetch(
+  "/proxy/stats/v2/JobInvolvement/4",
   {
     method: "get",
   },
 );
 
-const { data: JobRoleStats } = await useFetch("/proxy/stats/v1/JobRole/5", {
-  method: "get",
-});
+const { data: JobSatisfaction } = await useFetch(
+  "/proxy/stats/v2/JobSatisfaction/4",
+  {
+    method: "get",
+  }
+);
 
-const { data: TotalWorkingYearsStats } = await useFetch(
-  "/proxy/stats/v1/TotalWorkingYears/10",
+const { data: PerformanceRating } = await useFetch(
+  "/proxy/stats/v2/PerformanceRating/4",
   {
     method: "get",
   },
 );
-const { data: TrainingTimesLastYearStats } = await useFetch(
-  "/proxy/stats/v1/TrainingTimesLastYear/10",
+const { data: RelationshipSatisfaction } = await useFetch(
+  "/proxy/stats/v2/RelationshipSatisfaction/4",
   {
     method: "get",
   },
 );
-const { data: YearsAtCompanyStats } = await useFetch(
-  "/proxy/stats/v1/YearsAtCompany/10",
+const { data: WorkLifeBalance } = await useFetch(
+  "/proxy/stats/v2/WorkLifeBalance/4",
   {
     method: "get",
   },
 );
-const { data: YearsInCurrentRoleStats } = await useFetch(
-  "/proxy/stats/v1/YearsInCurrentRole/10",
+
+const { data: YearsSinceLastPromotion } = await useFetch(
+  "/proxy/stats/v2/YearsSinceLastPromotion/4",
   {
     method: "get",
   },
@@ -174,8 +178,10 @@ const { data: YearsInCurrentRoleStats } = await useFetch(
 
 const filter = async () => {
   ////////////////////////////////////
-  // reFetch BusinessTravel Stats
-  await useFetch("/proxy/stats/v1/BusinessTravel/3", {
+  // reFetch EnvironmentSatisfaction Stats
+  await useFetch(
+    "/proxy/stats/v2/EnvironmentSatisfaction/4",
+    {
     method: "get",
     params: {
       Attrition: attrition.value,
@@ -191,7 +197,7 @@ const filter = async () => {
         console.log(error);
       } else {
         console.log(data);
-        BusinessTravelStats.value = data;
+        EnvironmentSatisfaction.value = data;
         forceRerender();
       }
     },
@@ -201,8 +207,10 @@ const filter = async () => {
   );
 
   ////////////////////////////////////
-  // reFetch DepartmentStats Stats
-  await useFetch("/proxy/stats/v1/Department/13", {
+  // reFetch JobInvolvement Stats
+  await useFetch(
+    "/proxy/stats/v1/JobInvolvement/4"
+    , {
     method: "get",
     params: {
       Attrition: attrition.value,
@@ -218,7 +226,7 @@ const filter = async () => {
         console.log(error);
       } else {
         console.log(data);
-        DepartmentStats.value = data;
+        JobInvolvement.value = data;
         forceRerender();
       }
     },
@@ -228,8 +236,10 @@ const filter = async () => {
   );
 
   ////////////////////////////////////
-  // reFetch JobRole Stats
-  await useFetch("/proxy/stats/v1/JobRole/8", {
+  // reFetch JobSatisfaction Stats
+  await useFetch(
+    "/proxy/stats/v2/JobSatisfaction/4"
+    , {
     method: "get",
     params: {
       Attrition: attrition.value,
@@ -245,7 +255,7 @@ const filter = async () => {
         console.log(error);
       } else {
         console.log(data);
-        JobRoleStats.value = data;
+        JobSatisfaction.value = data;
         forceRerender();
       }
     },
@@ -255,8 +265,10 @@ const filter = async () => {
   );
 
   ////////////////////////////////////
-  // reFetch TotalWorkingYears Stats
-  await useFetch("/proxy/stats/v1/TotalWorkingYears/10", {
+  // reFetch PerformanceRating Stats
+  await useFetch(
+    "/proxy/stats/v2/PerformanceRating/4"
+    , {
     method: "get",
     params: {
       Attrition: attrition.value,
@@ -272,7 +284,7 @@ const filter = async () => {
         console.log(error);
       } else {
         console.log(data);
-        TotalWorkingYearsStats.value = data;
+        PerformanceRating.value = data;
         forceRerender();
       }
     },
@@ -282,8 +294,10 @@ const filter = async () => {
   );
 
   ////////////////////////////////////
-  // reFetch YearsAtCompany Stats
-  await useFetch("/proxy/stats/v1/YearsAtCompany/10", {
+  // reFetch RelationshipSatisfaction Stats
+  await useFetch(
+    "/proxy/stats/v2/RelationshipSatisfaction/4"
+    , {
     method: "get",
     params: {
       Attrition: attrition.value,
@@ -310,7 +324,9 @@ const filter = async () => {
 
   ////////////////////////////////////
   // reFetch YearsInCurrentRole Stats
-  await useFetch("/proxy/stats/v1/YearsInCurrentRole/10", {
+  await useFetch(
+    "/proxy/stats/v1/YearsInCurrentRole/10"
+    , {
     method: "get",
     params: {
       Attrition: attrition.value,

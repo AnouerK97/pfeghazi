@@ -124,28 +124,28 @@
       <Charts-BarChart
         :data="AgeStats"
         v-if="renderComponent"
-        name="Age Distribuation"
+        name="Age Distribution"
       />
       <Charts-BarChart
         :data="NumCompaniesWorkedStats"
         v-if="renderComponent"
-        name="Number of Companies Worked Distribuation"
+        name="Number of Companies Worked Distribution"
       />
       <Charts-DoughnutChart
         :data="EducationStats"
         v-if="renderComponent"
-        name="Education Distribuation"
+        name="Education Distribution"
       />
       <Charts-DoughnutChart
         :data="EducationFieldStats"
         v-if="renderComponent"
-        name="EducationField Distribuation"
+        name="EducationField Distribution"
       />
     </section>
     <Charts-LineChart
       :data="DistanceFromHomeStats"
       v-if="renderComponent"
-      name="Distance From Home Distribuation"
+      name="Distance From Home Distribution"
     />
   </div>
 </template>

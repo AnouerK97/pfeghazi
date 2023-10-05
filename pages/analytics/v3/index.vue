@@ -83,19 +83,19 @@
     </section>
 
     <Charts-LineChart
-      :data="TrainingTimesLastYearStats"
+      :data="GrossSalary"
       v-if="renderComponent"
-      name="Training Times Last Year Distribuation"
+      name="Gross Salary Distribution"
     />
     <Charts-LineChart
-      :data="YearsAtCompanyStats"
+      :data="DailyRate"
       v-if="renderComponent"
-      name="Years At Company Distribuation"
+      name="Daily Rate Distribution"
     />
     <Charts-LineChart
-      :data="YearsInCurrentRoleStats"
+      :data="MonthlyIncome"
       v-if="renderComponent"
-      name="Years In Current Role Distribuation"
+      name="Net Salary Distribution"
     />
   </div>
 </template>
@@ -105,53 +105,32 @@ const attrition = ref("");
 const department = ref("");
 const jobRole = ref("");
 
-const { data: BusinessTravelStats } = await useFetch(
-  "/proxy/stats/v1/BusinessTravel/3",
+const { data: GrossSalary } = await useFetch(
+  "/proxy/stats/v3/GrossSalary/10",
   {
     method: "get",
   },
 );
 
-const { data: DepartmentStats } = await useFetch(
-  "/proxy/stats/v1/Department/13",
+const { data: DailyRate } = await useFetch(
+  "/proxy/stats/v3/DailyRate/13",
   {
     method: "get",
   },
 );
 
-const { data: JobRoleStats } = await useFetch("/proxy/stats/v1/JobRole/5", {
-  method: "get",
-});
+const { data: MonthlyIncome } = await useFetch(
+  "/proxy/stats/v3/MonthlyIncome/10",
+  {
+    method: "get",
+  },
+);
 
-const { data: TotalWorkingYearsStats } = await useFetch(
-  "/proxy/stats/v1/TotalWorkingYears/10",
-  {
-    method: "get",
-  },
-);
-const { data: TrainingTimesLastYearStats } = await useFetch(
-  "/proxy/stats/v1/TrainingTimesLastYear/10",
-  {
-    method: "get",
-  },
-);
-const { data: YearsAtCompanyStats } = await useFetch(
-  "/proxy/stats/v1/YearsAtCompany/10",
-  {
-    method: "get",
-  },
-);
-const { data: YearsInCurrentRoleStats } = await useFetch(
-  "/proxy/stats/v1/YearsInCurrentRole/10",
-  {
-    method: "get",
-  },
-);
 
 const filter = async () => {
   ////////////////////////////////////
-  // reFetch BusinessTravel Stats
-  await useFetch("/proxy/stats/v1/BusinessTravel/3", {
+  // reFetch GrossSalary Stats
+  await useFetch("/proxy/stats/v3/GrossSalary/3", {
     method: "get",
     params: {
       Attrition: attrition.value,
@@ -167,7 +146,55 @@ const filter = async () => {
         console.log(error);
       } else {
         console.log(data);
-        BusinessTravelStats.value = data;
+        GrossSalary.value = data;
+        forceRerender();
+      }
+    },
+    (error) => {
+      console.log("Exception:", error);
+    },
+  );
+  await useFetch("/proxy/stats/v3/DailyRate/3", {
+    method: "get",
+    params: {
+      Attrition: attrition.value,
+      Department: department.value,
+      JobRole: jobRole.value,
+    },
+  }).then(
+    (res) => {
+      const data = res.data.value;
+      const error = res.error.value;
+      if (error) {
+        console.log("ERROR:");
+        console.log(error);
+      } else {
+        console.log(data);
+        DailyRate.value = data;
+        forceRerender();
+      }
+    },
+    (error) => {
+      console.log("Exception:", error);
+    },
+  );
+  await useFetch("/proxy/stats/v3/MonthlyIncome/3", {
+    method: "get",
+    params: {
+      Attrition: attrition.value,
+      Department: department.value,
+      JobRole: jobRole.value,
+    },
+  }).then(
+    (res) => {
+      const data = res.data.value;
+      const error = res.error.value;
+      if (error) {
+        console.log("ERROR:");
+        console.log(error);
+      } else {
+        console.log(data);
+        MonthlyIncome.value = data;
         forceRerender();
       }
     },
@@ -176,140 +203,6 @@ const filter = async () => {
     },
   );
 
-  ////////////////////////////////////
-  // reFetch DepartmentStats Stats
-  await useFetch("/proxy/stats/v1/Department/13", {
-    method: "get",
-    params: {
-      Attrition: attrition.value,
-      Department: department.value,
-      JobRole: jobRole.value,
-    },
-  }).then(
-    (res) => {
-      const data = res.data.value;
-      const error = res.error.value;
-      if (error) {
-        console.log("ERROR:");
-        console.log(error);
-      } else {
-        console.log(data);
-        DepartmentStats.value = data;
-        forceRerender();
-      }
-    },
-    (error) => {
-      console.log("Exception:", error);
-    },
-  );
-
-  ////////////////////////////////////
-  // reFetch JobRole Stats
-  await useFetch("/proxy/stats/v1/JobRole/8", {
-    method: "get",
-    params: {
-      Attrition: attrition.value,
-      Department: department.value,
-      JobRole: jobRole.value,
-    },
-  }).then(
-    (res) => {
-      const data = res.data.value;
-      const error = res.error.value;
-      if (error) {
-        console.log("ERROR:");
-        console.log(error);
-      } else {
-        console.log(data);
-        JobRoleStats.value = data;
-        forceRerender();
-      }
-    },
-    (error) => {
-      console.log("Exception:", error);
-    },
-  );
-
-  ////////////////////////////////////
-  // reFetch TotalWorkingYears Stats
-  await useFetch("/proxy/stats/v1/TotalWorkingYears/10", {
-    method: "get",
-    params: {
-      Attrition: attrition.value,
-      Department: department.value,
-      JobRole: jobRole.value,
-    },
-  }).then(
-    (res) => {
-      const data = res.data.value;
-      const error = res.error.value;
-      if (error) {
-        console.log("ERROR:");
-        console.log(error);
-      } else {
-        console.log(data);
-        TotalWorkingYearsStats.value = data;
-        forceRerender();
-      }
-    },
-    (error) => {
-      console.log("Exception:", error);
-    },
-  );
-
-  ////////////////////////////////////
-  // reFetch YearsAtCompany Stats
-  await useFetch("/proxy/stats/v1/YearsAtCompany/10", {
-    method: "get",
-    params: {
-      Attrition: attrition.value,
-      Department: department.value,
-      JobRole: jobRole.value,
-    },
-  }).then(
-    (res) => {
-      const data = res.data.value;
-      const error = res.error.value;
-      if (error) {
-        console.log("ERROR:");
-        console.log(error);
-      } else {
-        console.log(data);
-        TrainingTimesLastYearStats.value = data;
-        forceRerender();
-      }
-    },
-    (error) => {
-      console.log("Exception:", error);
-    },
-  );
-
-  ////////////////////////////////////
-  // reFetch YearsInCurrentRole Stats
-  await useFetch("/proxy/stats/v1/YearsInCurrentRole/10", {
-    method: "get",
-    params: {
-      Attrition: attrition.value,
-      Department: department.value,
-      JobRole: jobRole.value,
-    },
-  }).then(
-    (res) => {
-      const data = res.data.value;
-      const error = res.error.value;
-      if (error) {
-        console.log("ERROR:");
-        console.log(error);
-      } else {
-        console.log(data);
-        YearsInCurrentRoleStats.value = data;
-        forceRerender();
-      }
-    },
-    (error) => {
-      console.log("Exception:", error);
-    },
-  );
 };
 import { nextTick, ref } from "vue";
 const renderComponent = ref(true);

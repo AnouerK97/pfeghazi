@@ -86,39 +86,39 @@
       <Charts-DoughnutChart
         :data="BusinessTravelStats"
         v-if="renderComponent"
-        name="Business Travel Distribuation"
+        name="Business Travel Distribution"
       />
       <Charts-DoughnutChart
         :data="DepartmentStats"
         v-if="renderComponent"
-        name="Department Distribuation"
+        name="Department Distribution"
       />
       <Charts-DoughnutChart
         :data="JobRoleStats"
         v-if="renderComponent"
-        name="Job Roled Stats Distribuation"
+        name="Job Roled Stats Distribution"
       />
     </section>
     <section class="mb-5 grid gap-5 md:grid-cols-2">
       <Charts-LineChart
         :data="TotalWorkingYearsStats"
         v-if="renderComponent"
-        name="Total Working Years Distribuation"
+        name="Total Working Years Distribution"
       />
       <Charts-LineChart
         :data="TrainingTimesLastYearStats"
         v-if="renderComponent"
-        name="Training Times Last Year Distribuation"
+        name="Training Times Last Year Distribution"
       />
       <Charts-LineChart
         :data="YearsAtCompanyStats"
         v-if="renderComponent"
-        name="Years At Company Distribuation"
+        name="Years At Company Distribution"
       />
       <Charts-LineChart
         :data="YearsInCurrentRoleStats"
         v-if="renderComponent"
-        name="Years In Current Role Distribuation"
+        name="Years In Current Role Distribution"
       />
     </section>
   </div>
